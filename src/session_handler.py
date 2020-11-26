@@ -1,5 +1,6 @@
 import csv
 import cv2
+import numpy as np
 
 class SessionHandler:
     def __init__(self, session_path):
@@ -26,4 +27,7 @@ class SessionHandler:
                 lines["left"].append(cv2.imread(line[0]))
                 lines["right"].append(cv2.imread(line[1]))
                 lines["meas"].append(float(line[3]))
+            lines["left"] = np.array(lines["left"])
+            lines["right"] = np.array(lines["right"])
+            lines["meas"] = np.array(lines["meas"])
         return lines
