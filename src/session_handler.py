@@ -10,6 +10,9 @@ class SessionHandler:
     def get_data(self):
         return self.data
 
+    def get_center_images(self):
+        return self.data["center"]
+
     def get_left_images(self):
         return self.data["left"]
 
@@ -20,13 +23,15 @@ class SessionHandler:
         return self.data["meas"]
 
     def __read(self):
-        lines = {"left": [], "right": [], "meas": []}
+        lines = {"center": [], "left": [], "right": [], "meas": []}
         with open(self.session_path) as csvfile:
             reader = csv.reader(csvfile)
             for line in reader:
-                lines["left"].append(cv2.imread(line[0]))
-                lines["right"].append(cv2.imread(line[1]))
+                lines["center"].append(cv2.imread(line[0]))
+                lines["left"].append(cv2.imread(line[1]))
+                lines["right"].append(cv2.imread(line[2]))
                 lines["meas"].append(float(line[3]))
+            lines["center"] = np.array(lines["center"])
             lines["left"] = np.array(lines["left"])
             lines["right"] = np.array(lines["right"])
             lines["meas"] = np.array(lines["meas"])
