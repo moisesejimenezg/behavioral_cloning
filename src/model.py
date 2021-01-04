@@ -27,3 +27,7 @@ class Model:
         print("Fitting model with: " + str(len(x)) + " images.")
         self.model.fit(x, y, validation_split=validation_split, shuffle=shuffle, epochs=5)
         self.model.save("model.h5")
+
+    def load_model(self, model = 'model.h5'):
+        self.model = load_model(model)
+        print(self.model.summary())

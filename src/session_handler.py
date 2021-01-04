@@ -27,10 +27,14 @@ class SessionHandler:
         with open(self.session_path) as csvfile:
             reader = csv.reader(csvfile)
             for line in reader:
-                lines["center"].append(cv2.imread(line[0]))
-                lines["left"].append(cv2.imread(line[1]))
-                lines["right"].append(cv2.imread(line[2]))
-                lines["meas"].append(float(line[3]))
+                center_img = cv2.cvtColor(cv2.imread(line[0]), cv2.COLOR_BGR2RGB)
+                left_img = cv2.cvtColor(cv2.imread(line[1]), cv2.COLOR_BGR2RGB)
+                right_img = cv2.cvtColor(cv2.imread(line[2]), cv2.COLOR_BGR2RGB)
+                meas = float(line[3])
+                lines["center"].append(center_img)
+                lines["left"].append(left_img)
+                lines["right"].append(right_img)
+                lines["meas"].append(meas)
             lines["center"] = np.array(lines["center"])
             lines["left"] = np.array(lines["left"])
             lines["right"] = np.array(lines["right"])
