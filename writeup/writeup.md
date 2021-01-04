@@ -90,7 +90,7 @@ The model used an adam optimizer, so the learning rate was not tuned manually (s
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. A combination of the following driving scenarios was used to collect data: centerline driving, centerline driving in the opposite direction, recovering from the boundaries.
+Training data was chosen to keep the vehicle driving on the road. A combination of the following driving scenarios was used to collect data: centerline driving and centerline driving in the opposite direction.
 
 For details about how the training data was created, see the next section.
 
