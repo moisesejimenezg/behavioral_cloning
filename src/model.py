@@ -7,7 +7,9 @@ from keras.layers.pooling import MaxPooling2D
 class Model:
     def __init__(self, image_h=160, image_w=320, image_d=3):
         model = Sequential()
+        ## Normalization
         model.add(Lambda(lambda x: x/255 - 0.5, input_shape=(160, 320, 3)))
+        ## Cropping of the images to focus on the valuable information
         model.add(Cropping2D(cropping=((70, 25), (0, 0))))
         model.add(Convolution2D(24, 5, 2, activation="relu"))
         model.add(Convolution2D(36, 5, 2, activation="relu"))
