@@ -13,16 +13,17 @@ if exists('model.h5'):
 model.fit_model(
     np.concatenate(
         (
-            session_handler.get_center_images(),
             session_handler.get_left_images(),
             session_handler.get_right_images(),
+            session_handler.get_center_images(),
         )
     ),
     np.concatenate(
         (
-            session_handler.get_measurements(),
             session_handler.get_measurements() + 0.2,
             session_handler.get_measurements() - 0.2,
+            session_handler.get_measurements(),
         )
     ),
 )
+model.show_performance()

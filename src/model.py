@@ -3,6 +3,8 @@ from keras.layers import Cropping2D
 from keras.layers.core import Dense, Activation, Flatten, Dropout, Lambda
 from keras.layers.convolutional import Conv2D, Convolution2D
 from keras.layers.pooling import MaxPooling2D
+from keras.utils import plot_model
+import matplotlib.pyplot as plt
 
 class Model:
     def __init__(self, image_h=160, image_w=320, image_d=3):
@@ -27,9 +29,21 @@ class Model:
 
     def fit_model(self, x, y, validation_split=0.2, shuffle=True):
         print("Fitting model with: " + str(len(x)) + " images.")
-        self.model.fit(x, y, validation_split=validation_split, shuffle=shuffle, epochs=5)
+        self.eval_result = self.model.fit(x, y, validation_split=validation_split, shuffle=shuffle, epochs=5)
         self.model.save("model.h5")
 
     def load_model(self, model = 'model.h5'):
         self.model = load_model(model)
-        print(self.model.summary())
+
+    def show_model(self):
+        self.model.summary()
+        plot_model(self.model, "model.png", show_shapes=True)
+
+    def show_performance(self):
+        plt.plot(self.eval_result.history['loss'])
+        plt.plot(self.eval_result.history['val_loss'])
+        plt.title('MSE Loss')
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.legend(['Training', 'Validation'], loc='upper right')
+        plt.show()
